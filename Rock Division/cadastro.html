@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Division | Cadastro</title>
+    <link rel="stylesheet" href="css/cadastro.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <img src="Imagens/2741308.png" alt="" class="logo">            <ul class="navbar">
+                <li>
+                    <a href="index.html">Inicio</a>
+                </li>
+                <li>Sobre</li>
+                <li>|</li>
+                <li> <a href="login.html"> Login </a> </li>
+                <li class="agora"> Cadastro </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="nome"> 
+        <img src="Imagens/Cool Text - Rock Division 459522205421819.png" alt="">
+    </div>
+    <div class="login">
+        <div class="container">
+            <div class="card">
+            <h2>Bem-Vindo!</h2>
+            <div class="formulario">
+                <div class="campo">
+                    <label> Nome </label>
+                    <input id="input_nome" type="text" placeholder="Digite seu nome: ">
+                </div>
+                <div class="campo">
+                    <label> Email </label>
+                    <input id="input_email" type="text" placeholder="Digite seu email: ">
+                </div>
+                <div class="campo">
+                    <label>Senha</label>
+                    <input id="input_senha" type="password" placeholder="*****">
+                </div>
+                <div class="campo">
+                    <label>Confirmação da Senha</label>
+                    <input id="input_confirmacao" type="password" placeholder="*****">
+                </div>
+                <button onclick="cadastrar()">Cadastrar</button>
+                <div class="msg" id="div_msg"></div>
+            </div>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container">
+        <p>Feito por Guilherme Passini || Rock Division &copy;</p>
+    </div>
+</div>
+</body>
+</html>
+<script>
+    function cadastrar() {
+
+        var nome = input_nome.value;
+        var email = input_email.value;
+        var senha = input_senha.value;
+        var confirmacao = input_confirmacao.value;
+
+        var arroba = email.indexOf('@');
+        var ponto = email.indexOf('.');
+        
+        var tamanhoNome = nome.length;
+        var tamanhoSenha = senha.length;
+        var hashtag = senha.indexOf('#');
+        var arrobaSenha = senha.indexOf('@');
+        var underline = senha.indexOf('_');
+        var cifrao = senha.indexOf('$');
+        var porcentagem = senha.indexOf('%');
+        var verificarSenha = confirmacao;
+
+        if (nome == '' ||
+            email == '' ||
+            senha == '' ||
+            confirmacao == "")
+            div_msg.innerHTML = '<u>Cuidado!</u> É necessário preencher todos os campos para prosseguir.';
+
+        else if (tamanhoNome <= 1)  div_msg.innerHTML = 'O nome inserido é inválido.';
+        else if (arroba < 0 || ponto < 0) div_msg.innerHTML = 'O e-mail inserido deve ser válido para prosseguir com o cadastro.';
+        else if (tamanhoSenha < 8) div_msg.innerHTML = 'A senha deve possuir ao menos 8 caracteres.';
+        else if (hashtag < 0 && arrobaSenha < 0 && underline < 0 && cifrao < 0 && porcentagem < 0) div_msg.innerHTML = 'Por razões de segurança, a senha deve conter ao menos um caractere especial.';
+        else if (senha != verificarSenha) div_msg.innerHTML = 'As senhas não coincidem.';
+        else {
+        div_msg.innerHTML = 'Usuário cadastrado com sucesso! Redirecionando para tela de login.'; 
+        console.log(arroba, ponto)
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nome,
+        emailServer: email,
+        senhaServer: senha,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+    
+        } else {
+            console.log('Houve um erro ao tentar realizar o cadastro');
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+      return false;
+      }
+  }
+
+</script>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock Division | Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<body>
+    <div class="header">
+        <div class="container">
+            <img src="Imagens/2741308.png" alt="" class="logo">            <ul class="navbar">
+                <li>
+                    <a href="index.html">Inicio</a>
+                </li>
+                <li>Sobre</li>
+                <li>|</li>
+                <li class="agora">Login</li>
+                <li>
+                    <a href="cadastro.html">Cadastro</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="nome"> 
+        <img src="Imagens/Cool Text - Rock Division 459522205421819.png" alt="">
+    </div>
+<div class="login">
+    <div class="container">
+        <img class="imagem" src="https://media.tenor.com/o0I3Rac6L4cAAAAi/rock-guitar.gif" alt="">
+        <div class="card">
+        <h2>Seja Bem Vindo!</h2>
+        <div class="formulario">
+            <div class="campo">
+                <label> Email </label>
+                <input id="input_email" type="text" placeholder="Digite seu email: ">
+            </div>
+            <div class="campo">
+                <label>Senha</label>
+                <input id="input_senha"type="password" placeholder="*****">
+            </div>
+            <button onclick="entrar()">Entrar</button>
+            <div id="div_msg"></div>
+        </div>
+      </div>
+    </div>
+</div>
+
+<div class="footer">
+    <div class="container">
+        <p>Feito por Guilherme Passini || Rock Division &copy;</p>
+    </div>
+</div>
+</body>
+</html>
+
+<script>
+    
+    function entrar() {
+        var email = input_email.value;
+        var senha = input_senha.value;
+
+        var arroba = email.indexOf('@');
+        var ponto = email.indexOf('.');
+        
+        var tamanhoSenha = senha.length;
+        var hashtag = senha.indexOf('#');
+        var arrobaSenha = senha.indexOf('@');
+        var underline = senha.indexOf('_');
+        var cifrao = senha.indexOf('$');
+        var porcentagem = senha.indexOf('%');
+
+        if (email == '' ||
+            senha == '')
+            div_msg.innerHTML = '<u>Cuidado!</u> É necessário preencher todos os campos para prosseguir.';
+
+        else if (arroba < 0 || ponto < 0) div_msg.innerHTML = 'O e-mail inserido deve ser válido para prosseguir com o cadastro.';
+        else if (tamanhoSenha < 8) div_msg.innerHTML = 'A senha deve possuir ao menos 8 caracteres.';
+        else if (hashtag < 0 && arrobaSenha < 0 && underline < 0 && cifrao < 0 && porcentagem < 0) div_msg.innerHTML = 'Por razões de segurança, a senha deve conter ao menos um caractere especial.';
+        else {
+        div_msg.innerHTML = 'Usuário logado com sucesso! Redirecionando para Dashboard.'; 
+
+        console.log("FORM LOGIN: ", email);
+        console.log("FORM SENHA: ", senha);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                emailServer: email,
+                senhaServer: senha
+            })
+        }).then(function (resposta) {
+            console.log("ESTOU NO THEN DO entrar()!")
+
+            if (resposta.ok) {
+                console.log(resposta);
+                resposta.json().then(json => {
+                    console.log(json);
+                    console.log(JSON.stringify(json));
+                    sessionStorage.EMAIL_USUARIO = json.email;
+                    sessionStorage.NOME_USUARIO = json.nome;
+                    sessionStorage.ID_USUARIO = json.id;
+
+                    setTimeout(function () {
+                        window.location = "cadastro.html";
+                    }, 1000); // apenas para exibir o loading
+
+                });
+
+            } else {
+
+                console.log("Houve um erro ao tentar realizar o login!");
+
+                resposta.text().then(texto => {
+                    console.error(texto);
+                });
+            }
+
+        })
+
+        return false;
+    }
+    }
+
+</script>
