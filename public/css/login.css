@@ -7,20 +7,19 @@ body {
   .header {
     border-bottom: 4px solid red;
     box-shadow: 1px 1px 10px red;
+    
   }
   .container {
     display: flex;
     width: 80%;
     margin: auto;
-  }
-  
-  .header .container {
     justify-content: space-between;
   }
   
   .logo {
     width: 75px;
   }
+  
   .navbar {
     font-size: large;
     display: flex;
@@ -33,36 +32,21 @@ body {
     
   }
   
-  .social {
-    background-color: #000000;
-    padding: 40px 0;
-  }
-  
-  .social .container {
-    justify-content: space-between;
-  }
-  
   .card {
-    color: white;
-    padding: 15px;
+    background-color: #ada7a7;
     display: flex;
-    width: 250px;
+    flex-direction: column;
     text-align: center;
     align-items: center;
-    flex-direction: column;
-    border: 1px solid red;
+    padding: 15px;
+    height: 450px;
+    width: 300px;
+    border: 3px solid #df3f1f;
     border-radius: 10px;
+    box-shadow: 1px 1px 10px #df3f1f;
   }
   
-  .card img {
-    width: 100px;
-    display: flex;
-    justify-content: center;
-  }
   
-  .card h4 {
-    font-size: 24px;
-  }
   
   .footer {
     height: 40px;
@@ -85,25 +69,7 @@ body {
   .footer .container p {
     font-weight: bold;
   }
-  
-  
-  
-  body::-webkit-scrollbar {
-    width: 12px;              
-  }
-  
-  body::-webkit-scrollbar-track {
-    background-color: black;
-    border-radius: 10px;     
-  }
-  
-  body::-webkit-scrollbar-thumb {
-    background-color: black; 
-    border-radius: 20px;    
-    border: 3px solid red;
-  }
-  
-  
+    
   .agora {
     font-weight: 800;
   }
@@ -123,16 +89,6 @@ body {
   
   }
   
-  .card { 
-    background-color: #ada7a7;
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    width: 300px;
-    border: 3px solid #df3f1f;
-    border-radius: 10px;
-    box-shadow: 1px 1px 10px #df3f1f;
-}
 
 .campo label {
     padding-bottom: 5px ;
@@ -147,6 +103,7 @@ body {
     display: flex;
     justify-content: start;
   }
+  
   .card h2 {
     color: #df3f1f;
   }   
@@ -193,11 +150,34 @@ body {
     display: flex;
     justify-content: center;
   }
+  .msg {
+    color:#df3f1f
+  }
+.msg a {
+
+    text-decoration: none;
+    color: #df3f1f;
+  }
   .nome img {
+    display: flex;
+    justify-content: center;
     padding-top: 30px;
     width: 550px;
-
   }
   
+  body::-webkit-scrollbar {
+    width: 12px;              
+  }
+  
+  body::-webkit-scrollbar-track {
+    background-color: black;
+    border-radius: 10px;     
+  }
+  
+  body::-webkit-scrollbar-thumb {
+    background-color: black; 
+    border-radius: 20px;    
+    border: 3px solid red;
+  }
   
   

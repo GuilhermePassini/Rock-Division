@@ -3,8 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rock Division | Login</title>
+    <title>Rock Division | Login </title>
+
+    <script src="./js/sessao.js"></script>
+
     <link rel="stylesheet" href="css/login.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
 </head>
 <body>
     <div class="header">
@@ -41,7 +45,7 @@
                 <input id="input_senha"type="password" placeholder="*****">
             </div>
             <button onclick="entrar()">Entrar</button>
-            <div id="div_msg"></div>
+            <div class="msg" id="div_msg"></div>
         </div>
       </div>
     </div>
@@ -61,26 +65,13 @@
         var email = input_email.value;
         var senha = input_senha.value;
 
-        var arroba = email.indexOf('@');
-        var ponto = email.indexOf('.');
-        
-        var tamanhoSenha = senha.length;
-        var hashtag = senha.indexOf('#');
-        var arrobaSenha = senha.indexOf('@');
-        var underline = senha.indexOf('_');
-        var cifrao = senha.indexOf('$');
-        var porcentagem = senha.indexOf('%');
+    
 
-        if (email == '' ||
-            senha == '')
+        if (email == '' || senha == '') {
             div_msg.innerHTML = '<u>Cuidado!</u> É necessário preencher todos os campos para prosseguir.';
-
-        else if (arroba < 0 || ponto < 0) div_msg.innerHTML = 'O e-mail inserido deve ser válido para prosseguir com o cadastro.';
-        else if (tamanhoSenha < 8) div_msg.innerHTML = 'A senha deve possuir ao menos 8 caracteres.';
-        else if (hashtag < 0 && arrobaSenha < 0 && underline < 0 && cifrao < 0 && porcentagem < 0) div_msg.innerHTML = 'Por razões de segurança, a senha deve conter ao menos um caractere especial.';
-        else {
-        div_msg.innerHTML = 'Usuário logado com sucesso! Redirecionando para Dashboard.'; 
-
+            return false;
+        }
+        
         console.log("FORM LOGIN: ", email);
         console.log("FORM SENHA: ", senha);
 
@@ -98,32 +89,33 @@
 
             if (resposta.ok) {
                 console.log(resposta);
+
                 resposta.json().then(json => {
                     console.log(json);
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
                     sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function () {
-                        window.location = "cadastro.html";
+                        window.location = "./dashboard/cards.html";
                     }, 1000); // apenas para exibir o loading
 
                 });
 
             } else {
-
+                div_msg.innerHTML = `Credenciais não são validas. Você deseja se cadastrar? <br> Clique abaixo: <br> <a href="cadastro.html">Cadastro <br> </a> `
                 console.log("Houve um erro ao tentar realizar o login!");
 
                 resposta.text().then(texto => {
                     console.error(texto);
                 });
             }
-
         })
 
         return false;
     }
-    }
+    
 
 </script>
