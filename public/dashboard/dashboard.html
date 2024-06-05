@@ -61,7 +61,7 @@
 
         <div class="dash">
             <div id="titleDash">
-                <h1>Este gráfico exibe suas últimas 10 tentativas no quiz</h1>
+                
             </div>
 
             <div class="btns-dash" id="btnAquario">
@@ -77,6 +77,7 @@
             </div>
         </div>
     </div>
+
 
     <script>
         document.getElementById('b_usuario').innerHTML = sessionStorage.NOME_USUARIO;
@@ -120,14 +121,12 @@
             console.log('Iniciando plotagem do gráfico...');
 
             // Verificando se há menos de 10 registros
-            if (dadosRecebidos.length < 10) {
-                alert("Você tem menos de 10 tentativas no jogo. Exibindo todas as tentativas disponíveis.");
-            }
+           
 
             // Criando estrutura para plotar gráfico - labels e dados
             // Rótulo que sera inserido no gráfico, no caso indíce da tentativa + 1;
             const labels = dadosRecebidos.map((registro, index) => `Tentativa:${index + 1}`);
-            const dataPoints = dadosRecebidos.map(registro => registro.pontuation);
+            const dataPoints = dadosRecebidos.map(registro => registro.pontuacao);
 
             console.log('----------------------------------------------');
             console.log('Dados recebidos:');
@@ -140,7 +139,7 @@
                     label: 'Pontuação',
                     data: dataPoints,
                     fill: false,
-                    backgroundColor: 'rgb(139, 166, 147)',
+                    backgroundColor: 'black',
                     borderColor: '#e63e3e',
                     borderWidth: 2,
                     tension: 0.4  // para suavizar a linha do gráfico
@@ -155,13 +154,13 @@
 
             // Configuração do gráfico
             const config = {
-                type: 'line',
+                type: 'bar',
                 data: dados,
                 options: {
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 10
+                            max: 100
                         }
                     },
                     plugins: {

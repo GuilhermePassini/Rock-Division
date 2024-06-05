@@ -15,7 +15,7 @@ function obterDados(req, res) {
                     console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
                     if (resultadoAutenticar.length == 0) {
-                        res.status(204).json({msg: "Você ainda não realizou uma tentativa no quiz!"});
+                        res.status(204).json({msg: "Você ainda não realizou uma tentativa no jogo!"});
                     } else{
                         res.status(200).json(
                             {

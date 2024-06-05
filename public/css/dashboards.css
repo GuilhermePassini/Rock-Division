@@ -8,35 +8,54 @@ body {
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.div-buttons {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.div-buttons>* {
-  margin-left: 30px;
-}
-
 /* pagina graficos */
 
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  height: 450px;
-  width: 100%;
-  align-items: center;
-  color: white;
+.dash-header {
+  background-color: #212124;
 }
 
-  
+.dash {
+  width: 80%;
+  position: relative;
+  top: 0;
+  left: 20%;
+  background-color: #161618;
+  height: 100vh;
+  overflow: auto;
+}
+
+
+
+
+
+canvas {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 /* PAGINA DOS GRÁFICOS 2023 */
+
+.janela {
+  display: flex;
+  /* width: 100vw; */
+}
 
 .header-left a {
   text-decoration: none;
   color: white;
 }
 
+.dash-right {
+  display: flex;
+  width: 70%;
+  height: fit-content;
+  background-color: #161618;
+  position: relative;
+  top: 0;
+  left: 25%;
+  height: 100vh;
+  overflow: auto;
+}
 .header-left {
   position: fixed;
   top: 0;
@@ -102,7 +121,6 @@ body {
   margin: 0;
   padding: 0;
 }
-
 .btn-logout {
   margin: 0;
   padding: 0;
