@@ -52,17 +52,6 @@ body {
   background-color: #212124;
 }
 
-.dash-right {
-  display: flex;
-  width: 70%;
-  height: fit-content;
-  background-color: black;
-  position: relative;
-  top: 0;
-  left: 25%;
-  height: 100vh;
-  overflow: auto;
-}
 
 .header-left h1 {
   color: red;
@@ -86,7 +75,7 @@ body {
 
 .btn-nav {
   width: 40%;
-  color: white;
+  color: black;
   background-color: red;
   border-radius: 5px;
   text-align: center;
@@ -95,7 +84,7 @@ body {
 
 .btn-nav-white {
   width: 40%;
-  background-color: white;
+  background-color: black;
   border: 3px solid red;
   border-radius: 5px;
   text-align: center;
@@ -119,13 +108,13 @@ body {
   padding: 0;
   width: 20%;
   background-color: black;
-  color: white;
+  color: red;
   border-radius: 10px;
   text-align: center;
   padding: 10px 15px;
   margin-bottom: 100px;
   cursor: pointer;
-  border: solid white; 
+  border: solid red; 
 }
 
 body {
@@ -175,17 +164,20 @@ body {
   position: absolute;
   top: 10px;
   left: 50%;
+  text-align: center;
   transform: translateX(-50%); 
   color: red;
   font-size: 24px;
   font-weight: bold;
   z-index: 400;
+  margin-left: 70px;
 }
 
 .tituloJogo {
   display: flex;
   justify-content: center;
   margin-left: 150px;
+  margin-top: 100px;
 }
 
 .janela  {
@@ -197,18 +189,43 @@ body {
 
 .janela button {
   display: flex;
-  margin-left: 150px;
-  margin-top: 50px;
+  justify-content: center;
+  margin: 0;
   padding: 0;
   width: 20%;
- 
+  background-color: black;
   color: red;
   border-radius: 10px;
   text-align: center;
   padding: 10px 15px;
+  margin-top: 50px;
   margin-bottom: 100px;
+  margin-left: 150px;
   cursor: pointer;
+  border: solid red; 
 }
 .tituloJogo {
   color: red;
+}
+
+.regras {
+  color: red;
+  font-size: 20px;
+  margin-left: 350px;
+  text-align: center;
+}
+
+body::-webkit-scrollbar {
+  width: 12px;              
+}
+
+body::-webkit-scrollbar-track {
+  background-color: black;
+  border-radius: 10px;     
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: black; 
+  border-radius: 20px;    
+  border: 3px solid red;
 }

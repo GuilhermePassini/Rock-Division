@@ -2,13 +2,13 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../Imagens/2741308.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Avisos</title>
+    <title>Rock Division | Guitar Division </title>
 
-    <link rel="stylesheet" href="/css/jogo.css">
+    <link rel="stylesheet" href="../css/jogo.css">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -18,7 +18,7 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao()" style="background-color: #161618;">
+<body  style="background-color: #161618;">
 
     <div class="janela">
         <div class="header-left">
@@ -28,7 +28,7 @@
             </div>
             <div class="btn-nav-white">
                 <a href="cards.html">
-                    <h3>Aquários</h3>
+                    <h3>Visão Geral</h3>
                 </a>
             </div>
             <div class="btn-nav-white">
@@ -47,6 +47,10 @@
         <div class="tituloJogo">
             <h1>Guitar Division </h1>
         </div>
+
+        <div id="div_regras" class="regras" >Guitar Division é um jogo de ritmo, você deve usar as teclas "a", "s", "d" e "f" em sequencia com os quadrados acima, quando o quadrado vermelho estiver próximo do de baixo você deve precionar a tecla para realizar um acerto, ao contrario disso você erra e se o bloco enconstar no final você perde.</div>
+        <br> <br>
+
         <div class="quadradoGrande" id="div_quadradoGrande">
             <div class="notas" data-key="a" style="left: 0;"></div>
             <div class="notas" data-key="s" style="left: 85px;"></div>
@@ -57,12 +61,13 @@
                 <div class="clique" data-key="s" style="left: 85px;"></div>
                 <div class="clique" data-key="d" style="left: 165px;"></div>
                 <div class="clique" data-key="f" style="left: 250px;"></div>
-
+                
             </div>
+
+            
         </div>
 
         <button id="comecar" onclick="iniciarJogo()">Começar</button>
-
         <div class="mensagem" id="mensagem"></div>
     </div>
 
@@ -72,18 +77,20 @@
         var acertos = 0;
         var tempoMensagem = null;
         var acertosFinal = 0;
-        var quadradoGrande = document.getElementById('div_quadradoGrande');
+        var quadradoGrande = div_quadradoGrande;
         var intervaloId;
         var cont = 0;
 
         function iniciarJogo() {
+            var texto = div_regras
+            texto.style.display = 'none';
             var comecarJogo = comecar
             comecarJogo.style.display = 'none';
             intervaloId = setInterval(novaNota, 1000);
             document.addEventListener('keydown', handleKeyPress);
         }
 
-        function novaNota() {
+        function novaNota() { 
             var tecla = teclas[Math.floor(Math.random() * teclas.length)];
             var notas = document.querySelector(`.notas[data-key="${tecla}"]`);
             var clone = notas.cloneNode();

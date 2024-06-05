@@ -9,7 +9,7 @@ body {
     
 }
 .header {
-    border-bottom: 4px solid red;
+    border-bottom: 3px solid red;
 
     
 }
@@ -29,7 +29,7 @@ body {
     display: flex;
     flex-direction: row;
     list-style: none;
-    width: 24%;
+    width: 32%;
     justify-content: space-between;
     color: red;
     align-items: center;
