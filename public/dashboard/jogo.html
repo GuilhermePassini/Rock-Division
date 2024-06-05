@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaTech | Avisos</title>
+
+    <link rel="stylesheet" href="/css/jogo.css">
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+</head>
+
+<body onload="validarSessao()" style="background-color: #161618;">
+
+    <div class="janela">
+        <div class="header-left">
+            <h1>Rock Division</h1>
+            <div class="hello">
+                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            </div>
+            <div class="btn-nav-white">
+                <a href="cards.html">
+                    <h3>Aquários</h3>
+                </a>
+            </div>
+            <div class="btn-nav-white">
+                <a href="./dashboard.html">
+                    <h3>Gráficos</h3>
+                </a>
+            </div>
+            <div class="btn-nav">
+                <h3>Jogo - Guitar</h3>
+            </div>
+            <div class="btn-logout" onclick="limparSessao()">
+                <h3>Sair</h3>
+            </div>
+        </div>
+
+        <div class="tituloJogo">
+            <h1>Guitar Division </h1>
+        </div>
+        <div class="quadradoGrande" id="div_quadradoGrande">
+            <div class="notas" data-key="a" style="left: 0;"></div>
+            <div class="notas" data-key="s" style="left: 85px;"></div>
+            <div class="notas" data-key="d" style="left: 165px;"></div>
+            <div class="notas" data-key="f" style="left: 250px;"></div>
+            <div id="quadradoBaixo">
+                <div class="clique" data-key="a" style="left: 0;"></div>
+                <div class="clique" data-key="s" style="left: 85px;"></div>
+                <div class="clique" data-key="d" style="left: 165px;"></div>
+                <div class="clique" data-key="f" style="left: 250px;"></div>
+
+            </div>
+        </div>
+
+        <button id="comecar" onclick="iniciarJogo()">Começar</button>
+
+        <div class="mensagem" id="mensagem"></div>
+    </div>
+
+    <script>
+        var teclas = ['a', 's', 'd', 'f'];
+        var notasAtivas = [];
+        var acertos = 0;
+        var tempoMensagem = null;
+        var acertosFinal = 0;
+        var quadradoGrande = document.getElementById('div_quadradoGrande');
+        var intervaloId;
+        var cont = 0;
+
+        function iniciarJogo() {
+            var comecarJogo = comecar
+            comecarJogo.style.display = 'none';
+            intervaloId = setInterval(novaNota, 1000);
+            document.addEventListener('keydown', handleKeyPress);
+        }
+
+        function novaNota() {
+            var tecla = teclas[Math.floor(Math.random() * teclas.length)];
+            var notas = document.querySelector(`.notas[data-key="${tecla}"]`);
+            var clone = notas.cloneNode();
+            clone.style.bottom = '500px';
+            clone.classList.add('ativo');
+            quadradoGrande.appendChild(clone);
+            notasAtivas.push(clone);
+            descerNota(clone);
+        }
+
+        function descerNota(notas) {
+            var bottom = 500;
+            var intervalo = setInterval(() => {
+                if (bottom <= 50) {
+                    clearInterval(intervalo);
+                    notas.remove();
+                    var novasNotasAtivas = [];
+                    for (var i = 0; i < notasAtivas.length; i++) {
+                        if (notasAtivas[i] !== notas) {
+                            novasNotasAtivas.push(notasAtivas[i]);
+                        }
+                    }
+                    notasAtivas = novasNotasAtivas;
+                    if (acertos === 0) {
+                        terminarJogo('Você perdeu! Quantidade de acertos: ' + acertosFinal);
+                    }
+                } else {
+                    bottom -= 5;
+                    notas.style.bottom = bottom + 'px';
+                }
+            }, 50);
+        }
+
+        function handleKeyPress(e) {
+            var key = e.key.toLowerCase();
+            var clique = document.querySelector(`.clique[data-key="${key}"]`);
+            if (clique) {
+                var notas = notasAtivas.find(n => n.getAttribute('data-key') === key && n.style.bottom <= '55px' && n.style.bottom >= '45px');
+                if (notas) {
+                    notas.remove();
+                    notasAtivas = notasAtivas.filter(n => n !== notas);
+                    acertos++;
+                    acertosFinal++;
+                    mostrarMensagem('Acertou! (Acertos: ' + acertos + ')');
+                } else {
+                    acertos = 0; // Resetar o contador de acertos
+                    mostrarMensagem('Errou!');
+                }
+            }
+        }
+
+        function mostrarMensagem(mensagem) {
+            var messageElement = document.getElementById('mensagem');
+            messageElement.textContent = mensagem;
+            if (tempoMensagem) {
+                clearTimeout(tempoMensagem); // Limpa o timeout anterior se houver
+            }
+            tempoMensagem = setTimeout(() => {
+                messageElement.textContent = '';
+            }, 1000);
+        }
+
+        function terminarJogo(mensagem) {
+            var messageElement = document.getElementById('mensagem');
+            messageElement.textContent = mensagem;
+            clearInterval(intervaloId); // Limpa o intervalo de spawn de notas
+            document.removeEventListener('keydown', handleKeyPress); // Remove o listener de teclas
+            if (cont < 1) {
+                cont++
+            fetch("/jogo/cadastrarPontuacao", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    idServer: sessionStorage.ID_USUARIO,
+                    pontuacaoServer: acertosFinal,
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+
+                    if (resposta.ok) {           
+
+                    } else {
+                        console.log('Houve um erro ao tentar realizar o cadastro');
+                    }
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+                });
+            return false;
+        }
+        }
+
+  
+        
+
+
+
+    </script>
+</body>
+
+</html>
