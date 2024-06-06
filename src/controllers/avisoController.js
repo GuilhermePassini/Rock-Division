@@ -2,7 +2,6 @@ var avisoModel = require("../models/avisoModel");
 
 function listar(req, res) {
     avisoModel.listar().then(function (resultado) {
-        console.log(Object.keys(resultado[0]))
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
