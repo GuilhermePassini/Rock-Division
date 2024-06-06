@@ -119,6 +119,9 @@ body {
     border: solid red; 
   }
 
+  .container {
+    margin-right: 100px;
+  }
 .dash-right {
   display: flex;
   width: 70%;
@@ -126,7 +129,8 @@ body {
   background-color: #161618;
   position: relative;
   top: 0;
-  left: 25%;
+  left: 30%;
+  
   height: 100vh;
   overflow: auto;
 }
