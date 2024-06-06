@@ -4,13 +4,12 @@
 <head>
     <!-- <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon"> -->
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="../Imagens/2741308.png" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YourTricks | Histórico</title>
 
     <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
-    <link rel="icon" href="../assets/icon/logoSite.png">
+    <link rel="shortcut icon" href="../Imagens/2741308.png" type="image/x-icon">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -37,11 +36,18 @@
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
-            <div class="btn-nav">
-                <h3>Histórico</h3>
+            <div class="btn-nav-white">
+                <a href="./cards.html">
+                    <h3>Visão Geral</h3>
+                </a>
             </div>
 
             <div class="btn-nav-white">
+                <a href="mural.html">
+                    <h3>Mural de Recomendações</h3>
+                </a>
+            </div>
+            <div class="btn-nav">
                 <a href="./dashboard.html">
                     <h3>Gráficos</h3>
                 </a>
@@ -49,7 +55,7 @@
 
             <div class="btn-nav-white">
                 <a href="./jogo.html">
-                    <h3>Jogo</h3>
+                    <h3>Jogo - Guitar</h3>
                 </a>
             </div>
 
@@ -61,7 +67,8 @@
 
         <div class="dash">
             <div id="titleDash">
-                
+                <h1 style="color: red; display: flex; justify-content: center;">Aqui estão suas tentativas e acertos no
+                    Jogo Guitar Division!!</h1>
             </div>
 
             <div class="btns-dash" id="btnAquario">
@@ -121,7 +128,7 @@
             console.log('Iniciando plotagem do gráfico...');
 
             // Verificando se há menos de 10 registros
-           
+
 
             // Criando estrutura para plotar gráfico - labels e dados
             // Rótulo que sera inserido no gráfico, no caso indíce da tentativa + 1;
@@ -160,7 +167,7 @@
                     scales: {
                         y: {
                             beginAtZero: true,
-                            max: 100
+                            max: 20
                         }
                     },
                     plugins: {

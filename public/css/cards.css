@@ -6,6 +6,8 @@ body {
   margin: 0;
   padding: 0;
   font-family: 'Barlow', 'Segoe UI', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #161618;
+
 }
 
 .div-buttons {
@@ -117,112 +119,26 @@ body {
   border: solid red; 
 }
 
-.janela {
-  display: flex;
-  width: 70%;
-  height: fit-content;
-  background-color: #161618;
-  position: relative;
-  top: 0;
-  left: 10%;
-  height: 100vh;
-  overflow: auto;
-}
+.dash h1 {
+    display: flex;
+    justify-content: center;
+    color: red;
+text-align: center;}
 
-body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  background-color: #000;
-  margin: 0;
-  position: relative;
-}
+.dash {
+        display: flex;
+        flex-direction: column;
+        width: 70%;
+        height: fit-content;
+        background-color: #161618;
+        position: relative;
+        top: 0;
+        left: 25%;
+        height: 100vh;
+        overflow: auto;
+        justify-content: start;
+      }
 
-.quadradoGrande {
-  display: flex;
-  position: relative;
-  width: 300px;
-  height: 500px;
-  border: 2px solid #fff;
-  overflow: hidden;
-
-}
-
-.notas {
-  position: absolute;
-  width: 50px;
-  height: 50px;
-  background-color: red;
-  bottom: 500px;
-}
-
-#quadradoBaixo {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 50px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.clique {
-  width: 50px;
-  height: 100%;
-  border: 1px solid red;
-}
-
-.mensagem {
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  text-align: center;
-  transform: translateX(-50%); 
-  color: red;
-  font-size: 24px;
-  font-weight: bold;
-  z-index: 400;
-
-}
-
-.tituloJogo {
-  display: flex;
-  justify-content: center;
-  margin-top: 100px;
-}
-
-.janela  {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.janela button {
-  display: flex;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
-  width: 20%;
-  background-color: black;
-  color: red;
-  border-radius: 10px;
-  text-align: center;
-  padding: 10px 15px;
-  margin-top: 50px;
-  margin-bottom: 100px;
-  cursor: pointer;
-  border: solid red; 
-}
-.tituloJogo {
-  color: red;
-}
-
-.regras {
-  color: red;
-  font-size: 20px;
-  text-align: center;
-}
 
 body::-webkit-scrollbar {
   width: 12px;              
@@ -238,3 +154,36 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;    
   border: 3px solid red;
 }
+
+.bandas{
+    display: flex;
+    color: white;
+    align-items: center;
+    text-align: center;
+    font-size: 20px;
+    margin: 3% 3% 3% 3%; 
+    flex-direction: column;
+}
+
+
+.bandas img{
+width: 30%;
+border: solid #df3f1f;
+margin: 3% 3% 3% 3%; 
+border-radius: 3%;
+box-shadow: 1px 1px 30PX red;
+}
+
+.bandas button {
+        margin: 0;
+        padding: 0;
+        width: 20%;
+        background-color: black;
+        color: red;
+        border-radius: 10px;
+        text-align: center;
+        padding: 2px 5px;
+        margin-bottom: 10px;
+        cursor: pointer;
+        border: solid red; 
+      }

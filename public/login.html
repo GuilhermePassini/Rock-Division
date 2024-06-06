@@ -18,7 +18,7 @@
                 <li>
                     <a href="index.html">Inicio</a>
                 </li>
-                <li>Sobre</li>
+                <li> <a href="sobre.html">Sobre</a> </li>
                 <li>|</li>
                 <li class="agora">Login</li>
                 <li>
@@ -97,7 +97,7 @@
                     sessionStorage.EMAIL_USUARIO = json[0].email;
                     sessionStorage.NOME_USUARIO = json[0].nome;
                     sessionStorage.ID_USUARIO = json[0].id;
-
+                    div_msg.innerHTML = '<u>Login Bem Sucedido!</u> Redirecionando para página do úsuario.';
                     setTimeout(function () {
                         window.location = "./dashboard/cards.html";
                     }, 1000); // apenas para exibir o loading

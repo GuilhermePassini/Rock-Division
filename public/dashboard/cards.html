@@ -2,15 +2,14 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../Imagens/2741308.png" type="image/x-icon">
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaTech | Tempo Real</title>
 
 
-    <link rel="stylesheet" href="./../css/dashboards.css">
-    <link rel="stylesheet" href="./../css/estilo.css" />
+    <link rel="stylesheet" href="./../css/cards.css">
 
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
@@ -20,80 +19,56 @@
         rel="stylesheet">
 </head>
 
-<body onload="validarSessao(), exibirAquarios(),  atualizacaoPeriodica()">
+<body onload="validarSessao()">
 
     <div class="janela">
 
         <div class="header-left dash-header">
 
-            <h1>AquaTech</h1>
+            <h1>Rock Division</h1>
 
             <div class="hello">
                 <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
             </div>
 
             <div class="btn-nav">
-                <h3>Aquários</h3>
+                <h3>Visão Geral</h3>
             </div>
-
+            <div class="btn-nav-white">
+                <a href="mural.html">
+                    <h3>Mural de Recomendações</h3>
+                </a>
+            </div>
             <div class="btn-nav-white">
                 <a href="./dashboard.html">
                     <h3>Gráficos</h3>
                 </a>
             </div>
 
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
-                </a>
-            </div>
 
             <div class="btn-nav-white">
                 <a href="./jogo.html">
-                    <h3>Jogo</h3>
+                    <h3>Jogo - Guitar</h3>
                 </a>
             </div>
 
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
-
         </div>
 
         <div class="dash">
-            <div id="alerta">
-            </div>
-            <div class="area-parametros-alerta">
-                <p class="titulo-legenda">
-                    Legenda - Parâmetros para Alertas
-                </p>
-                <div class="parametros-alerta">
-                    <div class="item-regua perigo-frio">
-                        <p>Perigo</p>
-                        <p>&lt;=5°C</p>
-                    </div>
-                    <div class="item-regua alerta-frio">
-                        <p>Alerta</p>
-                        <p>&lt;=10°C</p>
-                    </div>
-                    <div class="item-regua ideal">
-                        <p>Ideal</p>
-                        <p>20°C</p>
-                    </div>
-                    <div class="item-regua alerta-quente">
-                        <p>Alerta</p>
-                        <p>&gt;=22°C</p>
-                    </div>
-                    <div class="item-regua perigo-quente">
-                        <p>Perigo</p>
-                        <p>&gt;=23°C</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="cards" id="cardAquarios">
-
-            </div>
+          <h1 > Boas Vindas a área do usuario!</h1>
+            
+                <h1 >Aqui na nossa Visão Geral Você vai encontrar um jogo desenvolvido chamado Guitar Division e sua pontuação dinamica e um mural de recomendação de música. Sinta-se Avontade para explorar!!1</h1>
+                
+                <div class="bandas"> <img src="../Imagens/misfits-caveira-logotipo.png" alt=""> <br> <h3>Misfits - Hybrid Moments</h3>
+                    <audio id="musica_audio" controls>
+                        <source src="../Imagens/HybridMoments.mp3" type="audio/mp3">
+                        Seu navegador não possui suporte ao elemento audio
+                    </audio><br><br>
+                    <button class="bandas" onclick="comecar()">Play</button>
+                    <button class="bandas" onclick="pausar()">Pause</button> </div>
 
         </div>
 
@@ -101,26 +76,15 @@
 
 </body>
 
-<script>
-
-    function exibirAquarios() {
-        JSON.parse(sessionStorage.AQUARIOS).forEach(item => {
-            document.getElementById("cardAquarios").innerHTML += `
-                    <div class="card-aquario">
-                        <div class="title-aquario">
-                            <h1>${item.descricao}</h1>
-                        </div>
-                        <div class="desc-aquario">
-                        <div class="temperatura">
-                            <p id="temp_aquario_${item.id}">-°C</p>
-                        </div>
-                        <div class="cor-alerta" id="card_${item.id}"></div>
-                    </div>
-                    </div>
-                    `
-        });
-    }
-
-</script>
-
 </html>
+
+<script>
+    function comecar() {
+        var musica = musica_audio;
+        musica.play();
+    }
+    function pausar() {
+        var musica = musica_audio;
+        musica.pause();
+    }       
+</script>

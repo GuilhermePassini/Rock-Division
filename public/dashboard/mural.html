@@ -2,13 +2,14 @@
 <html lang="pt-br">
 
 <head>
-    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="../Imagens/2741308.png" type="image/x-icon">
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AquaTech | Avisos</title>
+    <title>Rock Division | Musicas</title>
 
-    <link rel="stylesheet" href="./../css/dashboards.css">
+    <link rel="stylesheet" href="./../css/mural.css">
     <link rel="stylesheet" href="./../css/estilo.css" />
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
@@ -34,20 +35,24 @@
 
             <div class="btn-nav-white">
                 <a href="cards.html">
-                    <h3>Aquários</h3>
+                    <h3>Visão Geral</h3>
                 </a>
             </div>
-
+            <div class="btn-nav">
+                <h3>Mural de Recomendações</h3>
+            </div>
             <div class="btn-nav-white">
                 <a href="./dashboard.html">
                     <h3>Gráficos</h3>
                 </a>
             </div>
 
-            <div class="btn-nav">
-                <h3>Mural de Avisos</h3>
+            
+            <div class="btn-nav-white">
+                <a href="./jogo.html">
+                    <h3>Jogo - Guitar</h3>
+                </a>
             </div>
-
             <div class="btn-logout" onclick="limparSessao()">
                 <h3>Sair</h3>
             </div>
@@ -65,12 +70,18 @@
                     <div class="div-form">
                         <form id="form_postagem" method="post" onsubmit="return publicar()">
                             <label>
-                                Título:
+                                Música:
                                 <br>
-                                <input name="titulo" id="titulo" maxlength="100" type="text">
+                                <input name="musica" id="musica" maxlength="100" type="text">
                             </label>
                             <br>
+                            <label>
+                                Banda:
+                                <br>
+                                <input name="banda" id="banda" maxlength="100" type="text">
+                            </label>
                             <br>
+
                             <label>
                                 Descrição (máximo de 250 caracteres):
                                 <br>
@@ -110,8 +121,9 @@
         var idUsuario = sessionStorage.ID_USUARIO;
 
         var corpo = {
-            titulo: form_postagem.titulo.value,
-            descricao: form_postagem.descricao.value
+            musica: form_postagem.musica.value,
+            banda: form_postagem.banda.value,
+            descricao: form_postagem.descricao.value,
         }
 
         fetch(`/avisos/publicar/${idUsuario}`, {
@@ -121,7 +133,7 @@
             },
             body: JSON.stringify(corpo)
         }).then(function (resposta) {
-
+            console.log(Object.keys(resposta))
             console.log("resposta: ", resposta);
 
             if (resposta.ok) {
@@ -195,7 +207,8 @@
                         // criando e manipulando elementos do HTML via JavaScript
                         var divPublicacao = document.createElement("div");
                         var spanID = document.createElement("span");
-                        var spanTitulo = document.createElement("span");
+                        var spanMusica = document.createElement("span");
+                        var spanBanda = document.createElement("span");
                         var spanNome = document.createElement("span");
                         var divDescricao = document.createElement("div");
                         var divButtons = document.createElement("div");
@@ -204,16 +217,22 @@
 
 
                         spanID.innerHTML = "ID: <b>" + publicacao.idAviso + "</b>";
-                        spanTitulo.innerHTML = "Título: <b>" + publicacao.titulo + "</b>";
+                        spanMusica.innerHTML = "Música: <b>" + publicacao.nomeMusica + "</b>";
+                        spanBanda.innerHTML = "Banda: <b>" + publicacao.nomeBanda + "</b>";
+
                         spanNome.innerHTML = "Autor: <b>" + publicacao.nome + "</b>";
                         divDescricao.innerHTML = "Descrição: <b>" + publicacao.descricao + "</b>";
                         btnEditar.innerHTML = "Editar";
                         btnDeletar.innerHTML = "Deletar";
 
                         divPublicacao.className = "publicacao";
-                        spanTitulo.id = "inputNumero" + publicacao.idAviso;
+                        spanMusica.id = "inputNumero" + publicacao.idAviso;
+                        spanBanda.id = "inputNumero" + publicacao.idAviso;
+
                         spanNome.className = "publicacao-nome";
-                        spanTitulo.className = "publicacao-titulo";
+                        spanMusica.className = "publicacao-musica";
+                        spanBanda.className = "publicacao-banda";
+
                         divDescricao.className = "publicacao-descricao";
 
                         divButtons.className = "div-buttons"
@@ -228,7 +247,8 @@
 
                         divPublicacao.appendChild(spanID);
                         divPublicacao.appendChild(spanNome);
-                        divPublicacao.appendChild(spanTitulo);
+                        divPublicacao.appendChild(spanMusica);
+                        divPublicacao.appendChild(spanBanda);
                         divPublicacao.appendChild(divDescricao);
                         divPublicacao.appendChild(divButtons);
                         divButtons.appendChild(btnEditar);
